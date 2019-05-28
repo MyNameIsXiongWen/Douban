@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hhh/utils/common.dart';
 import 'package:hhh/utils/http_manager.dart';
 import 'package:hhh/utils/http_address.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -133,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                     'images/close.png',
                     height: 25,
                   ),
-                  onTap: () => print('object'),
+                  onTap: () => Navigator.of(context).pop(),
                 )),
             Positioned(
                 bottom: 100,
@@ -190,13 +189,18 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     TextFormField(
+                      // initialValue: _phoneNumber,
                         validator: (value) {
+                          if (value.length > 11) {
+                            value = value.substring(0, 11);
+                          }
                           _phoneNumber = value;
                         },
-                        autovalidate: true,
+                        maxLength: 11,
                         keyboardType: TextInputType.phone,
                         decoration: _codeLogin
                             ? InputDecoration(
+                              counterText: '',
                                 border: InputBorder.none,
                                 hintText: '手机号',
                                 icon: Text('+86',
@@ -206,6 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                                         fontSize: 13)),
                               )
                             : InputDecoration(
+                              counterText: '',
                                 border: InputBorder.none,
                                 hintText: '手机号 / 邮箱',
                               )),
@@ -217,9 +222,10 @@ class _LoginPageState extends State<LoginPage> {
                       validator: (value) {
                         _password = value;
                       },
-                      autovalidate: true,
+                      maxLength: 6,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
+                        counterText: '',
                         border: InputBorder.none,
                         hintText: _codeLogin ? '验证码' : '密码',
                       ),

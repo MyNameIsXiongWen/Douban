@@ -5,7 +5,6 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:hhh/utils/common.dart';
 import 'package:crypto/crypto.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 const String kAppKey = '844c3025fa90c45e';
 const String kAppSecret = 'B62E6C010EEF6E93563FE13582CA4B52';
@@ -23,7 +22,7 @@ class HttpManager {
   static get(String url, String path, Function successCallBack, {Function errorCallBack}) async {
     Options option = Options(
       headers: getRequestHeaders(),
-      connectTimeout: 30,
+      connectTimeout: 15000,
       // contentType: ContentType.json,
       // responseType: ResponseType.json
     );

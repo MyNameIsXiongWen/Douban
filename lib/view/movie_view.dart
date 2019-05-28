@@ -4,27 +4,32 @@ import 'package:hhh/utils/http_manager.dart';
 import 'package:hhh/model/movie_model.dart';
 import 'package:hhh/item/movie_item.dart';
 import 'movie_detail_view.dart';
-import 'package:hhh/utils/http_address.dart';
+import 'login_view.dart';
+import 'package:hhh/utils/custom_route.dart';
 
 class MoviePage extends StatefulWidget {
   @override
   MoviePageState createState() => new MoviePageState();
 }
 
-class MoviePageState extends State<MoviePage> with SingleTickerProviderStateMixin {
+class MoviePageState extends State<MoviePage>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
   List _navTabTitles = ['电影', '电视', '综艺', '读书', '音乐', '同城'];
-  List _topIcons = [{'icon': 'images/search_home.png', 'title': '找电影'},
-                    {'icon': 'images/ranking_home.png', 'title': '豆瓣榜单'},
-                    {'icon': 'images/card_home.png', 'title': '豆瓣猜'},
-                    {'icon': 'images/movie_home.png', 'title': '豆瓣片单'}];
+  List _topIcons = [
+    {'icon': 'images/search_home.png', 'title': '找电影'},
+    {'icon': 'images/ranking_home.png', 'title': '豆瓣榜单'},
+    {'icon': 'images/card_home.png', 'title': '豆瓣猜'},
+    {'icon': 'images/movie_home.png', 'title': '豆瓣片单'}
+  ];
   List<Movie> _movieList = [];
   bool _movieShowed = true;
   String _movieCount = '4';
   TextEditingController _searchTextCtrl = TextEditingController();
 
   void getTodayMovieList() async {
-    HttpManager.get(Util.kJuheUrl, 'key=' + kApiKey + '&cityid=' + kCityId, (data) {
+    HttpManager.get(Util.kJuheUrl, 'key=' + kApiKey + '&cityid=' + kCityId,
+        (data) {
       print(data);
       List movie = data;
       List<Movie> tempList = [];
@@ -41,8 +46,9 @@ class MoviePageState extends State<MoviePage> with SingleTickerProviderStateMixi
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, initialIndex: 0, length: _navTabTitles.length);
-    // getTodayMovieList();
+    _tabController = TabController(
+        vsync: this, initialIndex: 0, length: _navTabTitles.length);
+    getTodayMovieList();
   }
 
   @override
@@ -83,33 +89,37 @@ class MoviePageState extends State<MoviePage> with SingleTickerProviderStateMixi
             ),
             Positioned(
               left: 10,
-              child: Image.asset('images/search_default.png', height: 23,),
+              child: Image.asset(
+                'images/search_default.png',
+                height: 23,
+              ),
             ),
             Positioned(
-              left: 40,
-              child: Container(
-                width: MediaQuery.of(context).size.width-30-80,
-                height: 30,
-                child: TextField(
-                  controller: _searchTextCtrl,
-                  maxLines: 1,
-                  textInputAction: TextInputAction.search,
-                  decoration: InputDecoration(
-                    hintText: '电影当中打动你的告白瞬间', 
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(top: 5)
+                left: 40,
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 30 - 80,
+                  height: 30,
+                  child: TextField(
+                    controller: _searchTextCtrl,
+                    maxLines: 1,
+                    textInputAction: TextInputAction.search,
+                    decoration: InputDecoration(
+                        hintText: '电影当中打动你的告白瞬间',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(top: 5)),
+                    style: TextStyle(fontSize: 14),
+                    onChanged: (content) {
+                      print(content);
+                    },
                   ),
-                  style: TextStyle(fontSize: 14),
-                  onChanged: (content) {
-                    print(content);
-                  },
-                ),
-              )
-            ),
+                )),
             Positioned(
               right: 10,
               child: GestureDetector(
-                child: Image.asset('images/scan_default.png', height: 23,),
+                child: Image.asset(
+                  'images/scan_default.png',
+                  height: 23,
+                ),
                 onTap: () {
                   print('======scan' + _searchTextCtrl.text);
                   _searchTextCtrl.clear();
@@ -127,11 +137,14 @@ class MoviePageState extends State<MoviePage> with SingleTickerProviderStateMixi
         labelColor: Colors.black,
         unselectedLabelColor: Color(0xFF707070),
         tabs: _navTabTitles.map((title) {
-          return Tab(text: title,);
+          return Tab(
+            text: title,
+          );
         }).toList(),
       ),
     );
   }
+
   Widget buildMovieView() {
     return ListView(
       shrinkWrap: true,
@@ -160,8 +173,16 @@ class MoviePageState extends State<MoviePage> with SingleTickerProviderStateMixi
           },
           child: Column(
             children: <Widget>[
-              Image.asset(json['icon'], height: 50,),
-              Text(json['title'], style: TextStyle(color: Color(0xFF707070),),),
+              Image.asset(
+                json['icon'],
+                height: 50,
+              ),
+              Text(
+                json['title'],
+                style: TextStyle(
+                  color: Color(0xFF707070),
+                ),
+              ),
             ],
           ),
         );
@@ -172,7 +193,7 @@ class MoviePageState extends State<MoviePage> with SingleTickerProviderStateMixi
   Widget buildMovieTab() {
     return Container(
       margin: EdgeInsets.only(top: 20),
-      width: MediaQuery.of(context).size.width-30,
+      width: MediaQuery.of(context).size.width - 30,
       height: 40,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -201,29 +222,31 @@ class MoviePageState extends State<MoviePage> with SingleTickerProviderStateMixi
 
   Widget buildMovieGridView() {
     return Container(
-      child: _movieList.length == 0 ?
-      Center(child: CircularProgressIndicator(),) :
-      GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 3 / 5
-        ),
-        shrinkWrap: true,
-        primary: false,
-        itemCount: _movieList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => MovieDetailView(
-                      movieId: _movieList[index].movieId)));
-            },
-            child: MovieItem(_movieList[index]),
-          );
-        },
-      ),
+      child: _movieList.length == 0
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 3 / 5),
+              shrinkWrap: true,
+              primary: false,
+              itemCount: _movieList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(CustomRoutePresent(LoginPage()));
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(builder: (context) => MovieDetailView(movieId: _movieList[index].movieId,))
+                    // );
+                  },
+                  child: MovieItem(_movieList[index]),
+                );
+              },
+            ),
     );
   }
 
@@ -233,26 +256,23 @@ class MoviePageState extends State<MoviePage> with SingleTickerProviderStateMixi
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
-            child: Text(
-              title, 
-              style: TextStyle(
-                fontSize: 18,
-                color: tag ? Colors.black : Color(0xFF707070),
-                fontWeight: tag ? FontWeight.w500 : FontWeight.w300
-              )
-            )
-          ),
+              child: Text(title,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: tag ? Colors.black : Color(0xFF707070),
+                      fontWeight: tag ? FontWeight.w500 : FontWeight.w300))),
           Container(
-            color: tag ? Colors.black : Colors.transparent,
-            width: 75,
-            height: 2
-          )
+              color: tag ? Colors.black : Colors.transparent,
+              width: 75,
+              height: 2)
         ],
       ),
       onTap: () {
         setState(() {
           _movieShowed = !_movieShowed;
-          _movieCount = _movieShowed ? _topIcons.length.toString() : _navTabTitles.length.toString();
+          _movieCount = _movieShowed
+              ? _topIcons.length.toString()
+              : _navTabTitles.length.toString();
         });
         print(title);
       },
