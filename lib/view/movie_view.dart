@@ -4,8 +4,6 @@ import 'package:hhh/utils/http_manager.dart';
 import 'package:hhh/model/movie_model.dart';
 import 'package:hhh/item/movie_item.dart';
 import 'movie_detail_view.dart';
-import 'login_view.dart';
-import 'package:hhh/utils/custom_route.dart';
 
 class MoviePage extends StatefulWidget {
   @override
@@ -238,10 +236,9 @@ class MoviePageState extends State<MoviePage>
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () {
-                    Navigator.of(context).push(CustomRoutePresent(LoginPage()));
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(builder: (context) => MovieDetailView(movieId: _movieList[index].movieId,))
-                    // );
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => MovieDetailView(movieId: _movieList[index].movieId,))
+                    );
                   },
                   child: MovieItem(_movieList[index]),
                 );

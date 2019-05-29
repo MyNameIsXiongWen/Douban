@@ -119,6 +119,7 @@ class PositionState extends State<PositionPage> {
   @override
   void initState() {
     super.initState();
+        print('=======maxScrollExtent');
     getPositionList();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
@@ -151,13 +152,31 @@ class PositionState extends State<PositionPage> {
         child: RefreshIndicator(
           displacement: 40,
           // notificationPredicate: defaultScrollNotificationPredicate(notification),
-          child: ListView.builder(
-            shrinkWrap: true, 
-            primary: false, 
+          child: ListView.separated(
+            primary: false,
+            shrinkWrap: true,
             controller: _scrollController,
-            itemCount: _positionList.length, 
-            itemBuilder: buildPositionItem
-            ),
+            itemCount: _positionList.length,
+            itemBuilder: buildPositionItem,
+            separatorBuilder: (context, index) {
+              if (index == 0) {
+                return Container(height: 20, color: Colors.red, child: Text('data11111'),);
+              }
+              else if (index == 5) {
+                return Container(height: 30, color: Colors.blue, child: Text('data55555'),);
+              }
+              return Container(height: 0, color: Colors.green,);
+            },
+          ),
+
+          // child: ListView.builder(
+          //   shrinkWrap: true, 
+          //   primary: false, 
+          //   controller: _scrollController,
+          //   itemCount: _positionList.length, 
+          //   itemBuilder: buildPositionItem
+          // ),
+
           onRefresh: _onDownpullRefresh,
         ),
       ),

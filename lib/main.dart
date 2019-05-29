@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:hhh/splash.dart';
-import 'package:hhh/home.dart';
+import 'package:hhh/splash.dart';
 import 'package:hhh/view/login_view.dart';
 
 void main() => runApp(new MaterialApp(
@@ -20,6 +19,6 @@ void main() => runApp(new MaterialApp(
         )
     )
   ),
+  home: new SplashPage(),
   routes: <String, WidgetBuilder>{'loginView': (_) => LoginPage()},
-  home: new HomePage(),
 ));

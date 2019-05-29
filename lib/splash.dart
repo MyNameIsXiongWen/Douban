@@ -13,7 +13,7 @@ class SplashState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer(const Duration(seconds: 1), (){
+    _timer = Timer(const Duration(milliseconds: 100), (){
       Navigator.of(context).pushAndRemoveUntil(
           new MaterialPageRoute(
               builder: (BuildContext context) => new HomePage()
