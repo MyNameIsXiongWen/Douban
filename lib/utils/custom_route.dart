@@ -97,7 +97,7 @@ class CustomRoutePresent extends PageRouteBuilder {
   final Widget widget;
   CustomRoutePresent(this.widget)
       : super(
-            transitionDuration: const Duration(seconds: 1),
+            transitionDuration: const Duration(milliseconds: 250),
             pageBuilder: (BuildContext context, 
                 Animation<double> animation1,
                 Animation<double> animation2) {

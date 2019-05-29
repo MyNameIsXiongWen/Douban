@@ -151,7 +151,6 @@ class PositionState extends State<PositionPage> {
         },
         child: RefreshIndicator(
           displacement: 40,
-          // notificationPredicate: defaultScrollNotificationPredicate(notification),
           child: ListView.separated(
             primary: false,
             shrinkWrap: true,
@@ -168,15 +167,6 @@ class PositionState extends State<PositionPage> {
               return Container(height: 0, color: Colors.green,);
             },
           ),
-
-          // child: ListView.builder(
-          //   shrinkWrap: true, 
-          //   primary: false, 
-          //   controller: _scrollController,
-          //   itemCount: _positionList.length, 
-          //   itemBuilder: buildPositionItem
-          // ),
-
           onRefresh: _onDownpullRefresh,
         ),
       ),

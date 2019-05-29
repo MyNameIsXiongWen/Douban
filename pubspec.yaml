@@ -29,6 +29,7 @@ dependencies:
   dio: ^2.0.15
   event_bus:  ^1.0.3
   shared_preferences: ^0.4.2
+  flutter_section_table_view:
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,16 @@ flutter:
    - images/scan_default.png
    - images/collect.png
    - images/close.png
+   - images/wechat.png
+   - images/sina.png
+   - images/mine_cover1.png
+   - images/mine_cover2.png
+   - images/mine_cover3.png
+   - images/mine_movie.png
+   - images/mine_publish.png
+   - images/mine_attention.png
+   - images/mine_photo.png
+   - images/mine_collect.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
