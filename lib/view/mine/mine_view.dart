@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hhh/utils/common.dart';
 import 'package:flutter_section_table_view/flutter_section_table_view.dart';
 import 'package:hhh/utils/custom_route.dart';
 import 'package:hhh/view/login_view.dart';
 import 'package:hhh/item/mine/mine_default_item.dart';
 import 'package:hhh/item/mine/mine_tab_item.dart';
-import 'package:hhh/view/movie_detail_view.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -79,7 +79,7 @@ class _MinePageState extends State<MinePage> {
             child: Container(
               alignment: Alignment.center,
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-              color: whiteColor,
+              color: Util.whiteColor,
               height: MediaQuery.of(context).padding.top + 44,
               width: MediaQuery.of(context).size.width,
               child: Text('我的', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
@@ -120,7 +120,7 @@ class _MinePageState extends State<MinePage> {
                           alignment: Alignment.center,
                           width: 150,
                           height: 40,
-                          color: whiteColor,
+                          color: Util.whiteColor,
                           child: Text('登录 / 注册', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.green[900]),)
                         )
                       ),
@@ -139,7 +139,7 @@ class _MinePageState extends State<MinePage> {
                             ),
                             Container(
                               padding: EdgeInsets.only(top: 5),
-                              child: Text('微信登录', style: TextStyle(color: whiteColor, fontSize: 11)),
+                              child: Text('微信登录', style: TextStyle(color: Util.whiteColor, fontSize: 11)),
                             )
                           ],
                         ),
@@ -151,7 +151,7 @@ class _MinePageState extends State<MinePage> {
                             ),
                             Container(
                               padding: EdgeInsets.only(top: 5),
-                              child: Text('微博登录', style: TextStyle(color: whiteColor, fontSize: 11)),
+                              child: Text('微博登录', style: TextStyle(color: Util.whiteColor, fontSize: 11)),
                             )
                           ],
                         ),

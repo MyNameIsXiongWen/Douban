@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hhh/view/login_view.dart';
 import 'view/position_view.dart';
-import 'view/movie_view.dart';
+import 'view/movie/movie_view.dart';
 import 'view/mine/mine_view.dart';
 import 'package:flutter/cupertino.dart';
 

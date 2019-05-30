@@ -21,7 +21,7 @@ class HttpManager {
 
   static get(String url, String path, Function successCallBack, {Function errorCallBack}) async {
     Options option = Options(
-      headers: getRequestHeaders(),
+      headers: await getRequestHeaders(),
       connectTimeout: 15000,
       // contentType: ContentType.json,
       // responseType: ResponseType.json
@@ -48,7 +48,7 @@ class HttpManager {
 
   static post(String url, String path, Map<String, dynamic> params, Function successCallBack, {Function errorCallBack}) async {
     Options option = Options(
-      headers: getRequestHeaders(),
+      headers: await getRequestHeaders(),
       connectTimeout: 15000,
     );
     var dio = new Dio();
@@ -79,15 +79,17 @@ class HttpManager {
   static Map<String, String> getRequestHeaders() {
     String randomString = getRandomString();
     String timeString = getCurrentTimeMillis();
+    String token = Util.getSharePreference('token').toString();
+    String shopId = Util.getSharePreference('shopId').toString();
     Map<String, String> requestHeader = {
       // 'Content-Type': kContentTypeForm,
-      'signature': sortRequestParams(randomString, timeString),
+      'signature': sortRequestParams(randomString, timeString, token, shopId),
       'noncestr': randomString,
       'timestamp': timeString,
       'authorization': kAppKey,
       'version': kAppVersion,
-      'token': Util.token,
-      'shopid': Util.shopId
+      'token': token,
+      'shopid': shopId
     };
     return requestHeader;
   }
@@ -106,14 +108,14 @@ class HttpManager {
     return randomStr;
   }
 
-  static String sortRequestParams(String randomStr, String timeStr) {
+  static String sortRequestParams(String randomStr, String timeStr, String token, String shopId) {
     Map<String, String> params = SplayTreeMap<String, String>();
     params['noncestr'] = randomStr;
     params['timestamp'] = timeStr;
     params['authorization'] = kAppKey;
     params['version'] = kAppVersion;
-    params['token'] = Util.getSharePreference('token').toString();
-    params['shopid'] = Util.getSharePreference('shopId').toString();
+    params['token'] = token;
+    params['shopid'] = shopId;
 
     List<String> paramList = List();
     params.forEach((key, value) {

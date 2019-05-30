@@ -10,8 +10,7 @@ class Util {
   static String kMankuItemAdmin = 'manku-item-admin/';
   static String kMankuOrderAdmin = 'manku-order-admin/';
 
-  static String token = '';
-  static String shopId = '';
+  static Color whiteColor = Colors.white;
 
 //  增
   static addSharePreference(String key, String value) async {
@@ -26,6 +25,8 @@ class Util {
 //  查
   static Future<String> getSharePreference(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key);
+    var value = prefs.getString(key);
+    print('========get:========$value');
+    return value;
   }
 }

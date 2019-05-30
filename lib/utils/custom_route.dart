@@ -116,3 +116,28 @@ class CustomRoutePresent extends PageRouteBuilder {
               );
             });
 }
+
+//从底部present
+class CustomRouteNoAnimation extends PageRouteBuilder {
+  final Widget widget;
+  CustomRouteNoAnimation(this.widget)
+      : super(
+            transitionDuration: const Duration(milliseconds: 250),
+            pageBuilder: (BuildContext context, 
+                Animation<double> animation1,
+                Animation<double> animation2) {
+              return widget;
+            },
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation1,
+                Animation<double> animation2,
+                Widget child) {
+              return SlideTransition(
+                position: Tween<Offset>(
+                        begin: Offset(0.0, 0.0), end: Offset(0.0, 0.0))
+                    .animate(CurvedAnimation(
+                        parent: animation1, curve: Curves.fastOutSlowIn)),
+                child: child,
+              );
+            });
+}

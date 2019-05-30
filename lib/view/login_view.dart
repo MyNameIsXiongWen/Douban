@@ -30,22 +30,25 @@ class _LoginPageState extends State<LoginPage> {
       print('success=$data');
       Util.addSharePreference('token', data['token'].toString());
       Util.addSharePreference('shopId', data['shop'][0]['shopId'].toString());
-      _getUserinfoRequest();
-    }, errorCallBack: (errorMsg) {
-      print('error=$errorMsg');
-    });
-  }
-
-  _getUserinfoRequest() {
-    HttpManager.post(
-        '',
-        Util.kMankuSystemAdmin + HttpAddress.kUserShopLogin + Util.shopId,
-        {}, (data) {
-      print('success=$data');
+      _getUserinfoRequest(data['shop'][0]['shopId'].toString());
     }, errorCallBack: (errorMsg) {
       Util.addSharePreference('token', '');
       Util.addSharePreference('shopId', '');
-      print('error=$errorMsg');
+      print('login:error=$errorMsg');
+    });
+  }
+
+  _getUserinfoRequest(String shopId) {
+    HttpManager.post(
+        '',
+        Util.kMankuSystemAdmin + HttpAddress.kUserShopLogin + shopId,
+        {}, (data) {
+      print('success=$data');
+      Util.addSharePreference('userInfo', data);
+    }, errorCallBack: (errorMsg) {
+      Util.addSharePreference('token', '');
+      Util.addSharePreference('shopId', '');
+      print('userinfo:error=$errorMsg');
     });
   }
 
@@ -152,14 +155,14 @@ class _LoginPageState extends State<LoginPage> {
                               GestureDetector(
                                 onTap: () {},
                                 child: Image.asset(
-                                  'images/zhifubao.png',
+                                  'images/wechat.png',
                                   height: 40,
                                 ),
                               ),
                               GestureDetector(
                                 onTap: () {},
                                 child: Image.asset(
-                                  'images/jingdong.png',
+                                  'images/sina.png',
                                   height: 40,
                                 ),
                               ),
@@ -222,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                       validator: (value) {
                         _password = value;
                       },
-                      maxLength: 6,
+                      maxLength: _codeLogin ? 6 : 16,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         counterText: '',
