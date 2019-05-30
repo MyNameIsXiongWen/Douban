@@ -78,6 +78,8 @@ flutter:
    - images/close.png
    - images/wechat.png
    - images/sina.png
+   - images/setting_white.png
+   - images/setting_black.png
    - images/mine_cover1.png
    - images/mine_cover2.png
    - images/mine_cover3.png

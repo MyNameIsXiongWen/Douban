@@ -6,7 +6,6 @@ class MineDefaultItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 40,
       padding: EdgeInsets.only(left: 15, right: 0),
       child: Column(
         children: <Widget>[

@@ -67,79 +67,137 @@ class MoviePageState extends State<MoviePage>
           ],
         ),
       ),
+      // body: NestedScrollView(
+      //   headerSliverBuilder: _sliverBuilder,
+      //   body: Center(
+      //     child: ListView.builder(
+      //       itemBuilder: _itemBuilder,
+      //       itemCount: 15,
+      //     ),
+      //   ),
+      // )
+        // body: Padding(
+        //   padding: const EdgeInsets.all(15.0),
+        //   child: TabBarView(
+        //     controller: _tabController,
+        //     children: <Widget>[
+        //       buildMovieView(),
+        //       buildMovieView(),
+        //       buildMovieView(),
+        //       buildMovieView(),
+        //       buildMovieView(),
+        //       buildMovieView()
+        //     ],
+        //   ),
+        // ),
+      // )
     );
+  }
+  
+  Widget _itemBuilder(BuildContext context, int index) {
+    return ListTile(
+      leading: Icon(Icons.phone_iphone),
+      title: Text('无与伦比的标题+$index'),
+    );
+  }
+// }
+
+  List<Widget> _sliverBuilder(BuildContext context, bool innerBoxIsScrolled) {
+    return <Widget>[
+      SliverAppBar(
+        centerTitle: true,    //标题居中
+        expandedHeight: 100.0,  //展开高度
+        floating: false,  //不随着滑动隐藏标题
+        pinned: true,    //固定在顶部
+        elevation: 1,
+        flexibleSpace: FlexibleSpaceBar(
+          titlePadding: EdgeInsets.only(bottom: 0),
+          background: buildAppBarTitle(),
+          title: buildAppBarBottom(),
+        ),
+      ),
+    ];
   }
 
   Widget buildAppBar() {
     return AppBar(
-      title: Container(
-        height: 64,
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Container(
-                width: MediaQuery.of(context).size.width - 30,
-                height: 30,
-                color: Color(0xFFf5f5f5),
-              ),
+      title: buildAppBarTitle(),
+      bottom: buildAppBarBottom(),
+    );
+  }
+
+  Widget buildAppBarTitle() {
+    return Container(
+      // padding: EdgeInsets.only(left: 15, right: 15),
+      height: 64,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Container(
+              width: MediaQuery.of(context).size.width - 30,
+              height: 30,
+              color: Color(0xFFf5f5f5),
             ),
-            Positioned(
-              left: 10,
+          ),
+          Positioned(
+            left: 10,
+            child: Image.asset(
+              'images/search_default.png',
+              height: 23,
+            ),
+          ),
+          Positioned(
+              left: 40,
+              child: Container(
+                width: MediaQuery.of(context).size.width - 30 - 80,
+                height: 30,
+                child: TextField(
+                  controller: _searchTextCtrl,
+                  maxLines: 1,
+                  textInputAction: TextInputAction.search,
+                  decoration: InputDecoration(
+                      hintText: '电影当中打动你的告白瞬间',
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.only(top: 5)),
+                  style: TextStyle(fontSize: 14),
+                  onChanged: (content) {
+                    print(content);
+                  },
+                ),
+              )),
+          Positioned(
+            right: 10,
+            child: GestureDetector(
               child: Image.asset(
-                'images/search_default.png',
+                'images/scan_default.png',
                 height: 23,
               ),
+              onTap: () {
+                print('======scan' + _searchTextCtrl.text);
+                _searchTextCtrl.clear();
+              },
             ),
-            Positioned(
-                left: 40,
-                child: Container(
-                  width: MediaQuery.of(context).size.width - 30 - 80,
-                  height: 30,
-                  child: TextField(
-                    controller: _searchTextCtrl,
-                    maxLines: 1,
-                    textInputAction: TextInputAction.search,
-                    decoration: InputDecoration(
-                        hintText: '电影当中打动你的告白瞬间',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 5)),
-                    style: TextStyle(fontSize: 14),
-                    onChanged: (content) {
-                      print(content);
-                    },
-                  ),
-                )),
-            Positioned(
-              right: 10,
-              child: GestureDetector(
-                child: Image.asset(
-                  'images/scan_default.png',
-                  height: 23,
-                ),
-                onTap: () {
-                  print('======scan' + _searchTextCtrl.text);
-                  _searchTextCtrl.clear();
-                },
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
-      bottom: TabBar(
-        controller: _tabController,
-        isScrollable: false,
-        indicatorColor: Colors.black,
-        indicatorSize: TabBarIndicatorSize.label,
-        labelColor: Colors.black,
-        unselectedLabelColor: Color(0xFF707070),
-        tabs: _navTabTitles.map((title) {
-          return Tab(
-            text: title,
-          );
-        }).toList(),
-      ),
+    );
+  }
+
+  Widget buildAppBarBottom () {
+    return TabBar(
+      controller: _tabController,
+      isScrollable: false,
+      indicatorColor: Colors.black,
+      indicatorSize: TabBarIndicatorSize.label,
+      labelColor: Colors.black,
+      unselectedLabelColor: Color(0xFF707070),
+      tabs: _navTabTitles.map((title) {
+        return Tab(
+          text: title,
+        );
+      }).toList(),
     );
   }
 

@@ -6,7 +6,7 @@ class MineTabItem extends StatefulWidget {
 }
 
 class _MineTabItemState extends State<MineTabItem> {
-
+  ScrollController _scrollController = ScrollController();
   int _currentIndex = 0;
 
   @override
@@ -18,7 +18,7 @@ class _MineTabItemState extends State<MineTabItem> {
           Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.all(15),
-            child: Text('我的书影音', style: TextStyle(fontWeight: FontWeight.w500)),
+            child: Text('我的书影音', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15)),
           ),
           buildItemTab(),
           Container(
@@ -26,15 +26,8 @@ class _MineTabItemState extends State<MineTabItem> {
             color: Color(0xFF707070),
           ),
           Expanded(
-            // child: PageView.custom(
-            //   childrenDelegate: new SliverChildBuilderDelegate(
-            //     (context, index) {
-            //         return Container(width: 100, height: 30, color: Colors.red, child: Text('index$index'),);
-            //     },
-            //     childCount: 3,
-            //   ),
-            // ),
             child: GridView.builder(
+              controller: _scrollController,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 mainAxisSpacing: 0,
@@ -95,7 +88,7 @@ class _MineTabItemState extends State<MineTabItem> {
           Expanded(
               child: Text(title,
                   style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 13,
                       color: tag == _currentIndex ? Colors.black : Color(0xFF707070),
                       fontWeight: tag == _currentIndex ? FontWeight.w500 : FontWeight.w300))),
           Container(
@@ -105,6 +98,9 @@ class _MineTabItemState extends State<MineTabItem> {
         ],
       ),
       onTap: () {
+        _scrollController.animateTo(
+          tag*(79.0*3), duration: Duration(milliseconds: 200), curve: Curves.fastOutSlowIn
+        );
         setState(() {
           _currentIndex = tag;
         });
