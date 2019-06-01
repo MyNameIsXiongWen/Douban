@@ -5,6 +5,7 @@ import 'package:hhh/utils/custom_route.dart';
 import 'package:hhh/view/login_view.dart';
 import 'package:hhh/item/mine/mine_default_item.dart';
 import 'package:hhh/item/mine/mine_tab_item.dart';
+import 'package:hhh/utils/DBDialog.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -30,6 +31,26 @@ class _MinePageState extends State<MinePage> {
 
   presentToLoginView() {
     Navigator.of(context).push(CustomRoutePresent(LoginPage()));
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return DBDialog(
+          title: '温馨提示',
+          message: '这还是一个测试探矿巴拉巴拉',
+          negativeText: '取消',
+          positiveText: '确定',
+          onCloseEvent: () {
+            print('点击了取消');
+            Navigator.of(context).pop();
+          },
+          onPositivePressEvent: (){
+            print('点击了确定');
+            Navigator.of(context).pop();
+          },
+        );
+      }
+    );
   }
 
   @override

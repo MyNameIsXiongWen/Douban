@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hhh/view/login_view.dart';
-import 'view/position_view.dart';
+import 'view/position/position_view.dart';
 import 'view/movie/movie_view.dart';
 import 'view/mine/mine_view.dart';
+import 'view/mall/mall_view.dart';
 import 'package:flutter/cupertino.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +17,7 @@ class HomeState extends State<HomePage> with SingleTickerProviderStateMixin {
   int _currentIndex = 0;
   var _tabImages;
   var _tabTitles = ['电影', '职位', '消息', '我的'];
-  List<Widget> _pageList = [MoviePage(), PositionPage(), LoginPage(), MinePage()];
+  List<Widget> _pageList = [MoviePage(), PositionPage(), MallPage(), MinePage()];
 
   @override
   void initState() {

@@ -28,7 +28,7 @@ class MoviePageState extends State<MoviePage>
   TextEditingController _searchTextCtrl = TextEditingController();
 
   void getTodayMovieList() async {
-    HttpManager.get(Util.kJuheUrl, 'key=' + kApiKey + '&cityid=' + kCityId,
+    HttpManager.get(Util.kJuheUrl, 'movies.today?key=' + kApiKey + '&cityid=' + kCityId,
         (data) {
       print(data);
       List movie = data;
@@ -102,7 +102,6 @@ class MoviePageState extends State<MoviePage>
       title: Text('无与伦比的标题+$index'),
     );
   }
-// }
 
   List<Widget> _sliverBuilder(BuildContext context, bool innerBoxIsScrolled) {
     return <Widget>[
@@ -290,7 +289,7 @@ class MoviePageState extends State<MoviePage>
                   crossAxisCount: 3,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
-                  childAspectRatio: 3 / 5),
+                  childAspectRatio: 3 / 6),
               shrinkWrap: true,
               primary: false,
               itemCount: _movieList.length,
@@ -302,7 +301,12 @@ class MoviePageState extends State<MoviePage>
                               movieId: _movieList[index].movieId,
                             )));
                   },
-                  child: MovieItem(_movieList[index]),
+                  child: MovieItem(
+                    movie: _movieList[index],
+                    clickContent: () {
+                    print('=======${_movieList[index].movieName}');
+                    },
+                  )
                 );
               },
             ),

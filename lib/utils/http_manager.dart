@@ -13,6 +13,7 @@ const String kAppVersion = '1.0.0';
 //聚合数据
 const String kApiKey = '8a5aba4cc818913e4681afe9db1eaa16';
 const String kCityId = '10';
+const String kCinemaId = '1188';
 
 const String kContentTypeJson = 'application/json';
 const String kContentTypeForm = 'application/x-www-form-urlencoded';
@@ -29,7 +30,7 @@ class HttpManager {
 
     Dio dio = new Dio();
     var response = await dio.get(
-      (url.length>0 ? url : Util.kMainUrl) + '?' + path,
+      (url.length>0 ? url : Util.kMainUrl) + path,
       queryParameters: null,
       options: option
     );

@@ -18,8 +18,8 @@ class _MovieDetailViewState extends State<MovieDetailView> with SingleTickerProv
   MovieDetail _movieDetail;
   TabController _tabController;
 
-  getMovieDetailRequest() {
-    HttpManager.get('http://v.juhe.cn/movie/query',
+  getMovieDetailRequest() async {
+     await HttpManager.get('http://v.juhe.cn/movie/query',
         'key=' + kApiKey + '&movieid=' + widget.movieId, (data) {
       print(data);
       setState(() {
@@ -102,7 +102,7 @@ class _MovieDetailViewState extends State<MovieDetailView> with SingleTickerProv
               Padding(
                 padding: const EdgeInsets.only(top: 3.0, bottom: 6.0),
                 child: Text(
-                  _movieDetail.alsoKnownAs + '(' + _movieDetail.movieId + ')',
+                  '${_movieDetail.alsoKnownAs}(${_movieDetail.year})',
                   style: TextStyle(
                       fontSize: 13.0,
                       color: Util.whiteColor,
@@ -110,13 +110,7 @@ class _MovieDetailViewState extends State<MovieDetailView> with SingleTickerProv
                 ),
               ),
               Text(
-                _movieDetail.country +
-                    ' / ' +
-                    _movieDetail.genres +
-                    ' / ' +
-                    '上映 / 片长' +
-                    _movieDetail.runtime +
-                    _movieDetail.alsoKnownAs,
+                '${_movieDetail.country} / ${_movieDetail.genres} / ${_movieDetail.releaseDate}上映 / 片长${_movieDetail.runtime}${_movieDetail.alsoKnownAs}',
                 style: TextStyle(fontSize: 11.0, color: Util.whiteColor),
                 softWrap: true,
                 textAlign: TextAlign.left,

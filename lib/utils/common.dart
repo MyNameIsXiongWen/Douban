@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Util {
-  static String kJuheUrl = 'http://v.juhe.cn/movie/movies.today';
+  static String kJuheUrl = 'http://v.juhe.cn/movie/';
 
   static String kMainUrl = 'https://cloudapi.mankuhome.com/v2/';
   static String kMankuSystemAdmin = 'manku-system-admin/';
