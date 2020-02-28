@@ -4,12 +4,16 @@ part 'movie_model.g.dart';
 
 @JsonSerializable()
 class Movie {
-  String movieId;
-  String movieName;
+  final String movieId;
+  final String movieName;
   @JsonKey(name: 'pic_url')
-  String picUrl;
+  final String picUrl;
 
-  Movie(this.movieId, this.movieName, this.picUrl);
+  Movie(
+    this.movieId,
+    this.movieName,
+    this.picUrl,
+  );
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 

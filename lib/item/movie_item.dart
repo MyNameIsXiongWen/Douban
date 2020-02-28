@@ -3,7 +3,8 @@ import 'package:hhh/model/movie_model.dart';
 
 class MovieItem extends StatelessWidget {
   final Movie movie;
-  MovieItem(this.movie);
+  final Function clickContent;
+  MovieItem({Key key, @required this.movie, this.clickContent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +43,16 @@ class MovieItem extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
           ),
         ),
-        Text(
-          '暂无评分',
-          style: TextStyle(color: Colors.grey, fontSize: 10.0),
+        // Text(
+        //   '暂无评分',
+        //   style: TextStyle(color: Colors.grey, fontSize: 10.0),
+        // ),
+        GestureDetector(
+          child: Text(
+            '暂无评分',
+            style: TextStyle(color: Colors.grey, fontSize: 10.0),
+          ),
+          onTap: this.clickContent,
         )
       ],
     );

@@ -4,53 +4,53 @@ part 'movie_detail_model.g.dart';
 
 @JsonSerializable()
 class MovieDetail {
-  String actors;
-  String country;
-  String directors;
-  String genres;
-  String language;
-  String poster;
-  String rated;
-  String rating;
-  String runtime;
-  String title;
-  String type;
-  String writers;
+  final String actors;
+  final String country;
+  final String directors;
+  final String genres;
+  final String language;
+  final String poster;
+  final String rated;
+  final String rating;
+  final String runtime;
+  final String title;
+  final String type;
+  final String writers;
   @JsonKey(name: 'movieid')
-  String movieId;
+  final String movieId;
   @JsonKey(name: 'also_known_as')
-  String alsoKnownAs;
+  final String alsoKnownAs;
   @JsonKey(name: 'film_locations')
-  String filmLocations;
+  final String filmLocations;
   @JsonKey(name: 'plot_simple')
-  String plotSimple;
+  final String plotSimple;
   @JsonKey(name: 'rating_count')
-  String ratingCount;
-//  @JsonKey(name: 'release_date')
-//  int releaseDate;
-//  int year;
+  final String ratingCount;
+  @JsonKey(name: 'release_date')
+  final String releaseDate;
+  final String year;
 
   MovieDetail(
-      this.actors,
-      this.country,
-      this.directors,
-      this.genres,
-      this.language,
-      this.poster,
-      this.rated,
-      this.rating,
-      this.runtime,
-      this.title,
-      this.type,
-      this.writers,
-      this.movieId,
-      this.alsoKnownAs,
-      this.filmLocations,
-      this.plotSimple,
-      this.ratingCount,
-//      this.releaseDate,
-//      this.year,
-      );
+    this.actors,
+    this.country,
+    this.directors,
+    this.genres,
+    this.language,
+    this.poster,
+    this.rated,
+    this.rating,
+    this.runtime,
+    this.title,
+    this.type,
+    this.writers,
+    this.movieId,
+    this.alsoKnownAs,
+    this.filmLocations,
+    this.plotSimple,
+    this.ratingCount,
+    this.releaseDate,
+    this.year,
+  );
 
   factory MovieDetail.fromJson(Map<String, dynamic> json) => _$MovieDetailFromJson(json);
 

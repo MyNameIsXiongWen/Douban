@@ -24,7 +24,9 @@ MovieDetail _$MovieDetailFromJson(Map<String, dynamic> json) {
       json['also_known_as'] as String,
       json['film_locations'] as String,
       json['plot_simple'] as String,
-      json['rating_count'] as String);
+      json['rating_count'] as String,
+      json['release_date'] as String,
+      json['year'] as String);
 }
 
 Map<String, dynamic> _$MovieDetailToJson(MovieDetail instance) =>
@@ -45,5 +47,7 @@ Map<String, dynamic> _$MovieDetailToJson(MovieDetail instance) =>
       'also_known_as': instance.alsoKnownAs,
       'film_locations': instance.filmLocations,
       'plot_simple': instance.plotSimple,
-      'rating_count': instance.ratingCount
+      'rating_count': instance.ratingCount,
+      'release_date': instance.releaseDate,
+      'year': instance.year
     };
